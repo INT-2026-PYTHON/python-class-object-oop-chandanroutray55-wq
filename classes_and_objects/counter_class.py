@@ -89,3 +89,61 @@ Explanation:
 =================================================
 
 """
+class Counter:
+    # CLASS attribute shared across all objects
+    total = 0 
+
+    def __init__(self, name):
+        # INSTANCE attributes unique to each object
+        self.name = name
+        self.count = 0 
+
+    def increment(self, step=1):
+        # Update instance attribute
+        self.count += step
+        # Update class attribute
+        Counter.total += step
+
+    def reset(self):
+        # Sets instance count back to 0 without touching Counter.total
+        self.count = 0
+
+    def __str__(self):
+        # Return string formatted as "<name>: count=<count>"
+        return f"{self.name}: count={self.count}"
+
+    @staticmethod
+    def show_total():
+        # Returns the class-level total
+        return Counter.total
+
+
+# ==========================================
+# DRIVER CODE (Matching Input/Output Example)
+# ==========================================
+if __name__ == "__main__":
+    # 4. Create at least THREE Counter objects
+    c1 = Counter("clicks")
+    c2 = Counter("views")
+    c3 = Counter("downloads")
+
+    # Call increment() a different number of times on each
+    for _ in range(3):
+        c1.increment()
+
+    for _ in range(5):
+        c2.increment()
+
+    c3.increment(10)
+
+    # Reset ONE of them
+    c1.reset()
+
+    # Print each object using print(c)
+    print(c1)
+    print(c2)
+    print(c3)
+
+    # Print the overall Counter.total
+    print(f"Total across all counters: {Counter.show_total()}")
+   
